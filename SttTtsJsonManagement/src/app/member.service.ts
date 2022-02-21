@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Member } from './member';
 import { MEMBERS } from './mock-members';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MemberService {
-  constructor() {}
-  getMembers(): Member[] {
-    return MEMBERS;
+  constructor(private messageService: MessageService) {}
+  getMembers(): Observable<Member[]> {
+    this.messageService.add('MemberService: 社員一覧データを取得しました');
+    return of(MEMBERS); // 実行した際にObservableオブジェクトに変換して渡す
+  }
+
+  getMember(id: number): Observable<Member> {
+    this.messageService.add(`MemberService: 社員データ(id = ${id})を取得しました`);
+    return of(MEMBERS.find((member) => member.id === id));
   }
 }

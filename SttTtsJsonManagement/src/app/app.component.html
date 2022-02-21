@@ -1,3 +1,13 @@
-<h1>{{title}}</h1>
-<div *ngIf="isAngular">Angularrrr</div>
-<app-members></app-members>
+<h1>{{ title }}</h1>
+
+<!-- // ページ遷移はrouterLinkを指定 -->
+<nav>
+  <a routerLink="/dashboard">ダッシュボード</a>
+  <a routerLink="/members">社員一覧</a>
+</nav>
+
+<!-- <div *ngIf="isAngular">Angularrrr</div> -->
+<router-outlet></router-outlet>
+<app-messages></app-messages>
+
+
